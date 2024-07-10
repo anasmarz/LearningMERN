@@ -1,6 +1,11 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import About from './components/about'; 
+import Profile from './components/profile';
+import Navbar from './components/navbar'; // Import the Navbar component
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -14,9 +19,11 @@ const App = () => {
       .catch(err => {
         console.error(err);
       });
-  }, []);
+  }, []); 
 
   const addTodo = () => {
+    if (newTodo.trim() === '') return;
+
     axios.post('http://localhost:5555/api/todos', { title: newTodo })
       .then(res => {
         setTodos([...todos, res.data]);
@@ -48,29 +55,46 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <h1>Todo List</h1>
-      <input
-        type="text"
-        value={newTodo}
-        onChange={e => setNewTodo(e.target.value)}
-        placeholder="Add a new todo"
-      />
-      <button onClick={addTodo}>Add</button>
-      <ul>
-        {todos.map(todo => (
-          <li key={todo._id}>
-            <span
-              style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-              onClick={() => toggleComplete(todo._id, todo.completed)}
-            >
-              {todo.title}
-            </span>
-            <button onClick={() => deleteTodo(todo._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar /> {/* Include the Navbar component */}
+        <Routes>
+          <Route path="/" element={
+            <div>
+              <h1>Todo List</h1>
+              <div className="inputContainer">
+                <input
+                  type="text"
+                  value={newTodo}
+                  onChange={e => setNewTodo(e.target.value)}
+                  placeholder="Add a new todo"
+                />
+                <button onClick={addTodo}>Add</button>
+              </div>
+              <div className="todoContainer">
+                <ul>
+                  {todos.map(todo => (
+                    <li key={todo._id} className="todoItem">
+                      <input
+                        type="checkbox"
+                        checked={todo.completed}
+                        onChange={() => toggleComplete(todo._id, todo.completed)}
+                      />
+                      <span className={todo.completed ? 'completed' : ''}>
+                        {todo.title}
+                      </span>
+                      <button onClick={() => deleteTodo(todo._id)}>Delete</button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          } />
+          <Route path="/about" element={<About />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 

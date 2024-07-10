@@ -1,19 +1,58 @@
 .App {
   font-family: Arial, sans-serif;
   text-align: center;
+  margin-top: 0px; /* Increased margin-top */
+  font-size: 18px; /* Increased font size */
 }
 
-input {
-  margin: 10px;
-  padding: 5px;
-  font-size: 16px;
+nav {
+  margin-bottom: 30px; /* Increased margin-bottom */
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 15px; /* Increased margin-right */
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #007BFF;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.inputContainer {
+  margin-bottom: 30px; /* Increased margin-bottom */
+}
+
+input[type="text"] {
+  margin-right: 15px; /* Increased margin-right */
+  padding: 12px; /* Increased padding */
+  font-size: 18px; /* Increased font size */
+  width: 250px; /* Increased width */
 }
 
 button {
-  margin: 5px;
-  padding: 5px 10px;
-  font-size: 16px;
-  cursor: pointer;
+  padding: 12px 20px; /* Increased padding */
+  font-size: 18px; /* Increased font size */
+}
+
+.todoContainer {
+  margin-top: 50px;
+  display: inline-block;
+  width: 350px; /* Increased width */
+  padding: 30px; /* Increased padding */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
 }
 
 ul {
@@ -21,18 +60,37 @@ ul {
   padding: 0;
 }
 
-li {
-  margin: 5px 0;
+.todoItem {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  margin: 15px 0; /* Increased margin */
 }
 
-li span {
-  margin-right: 10px;
+.todoItem input[type="checkbox"] {
+  margin-right: 15px; /* Increased margin-right */
+}
+
+.todoItem span {
+  flex-grow: 1;
+  font-size: 18px; /* Increased font size */
+}
+
+.todoItem span.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.todoItem button {
+  padding: 7px 15px; /* Increased padding */
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  margin-left: 15px; /* Increased margin-left */
 }
 
-li button {
-  margin-left: 10px;
+.About {
+  margin-top: 30px; /* Increased margin-top */
 }
